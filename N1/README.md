@@ -1,4 +1,4 @@
-#N1 (A Mail Client by Nylas)
+# N1 (A Mail Client by Nylas)
 
 This script will repackage the debian binary and make a Slackware Package.
 
