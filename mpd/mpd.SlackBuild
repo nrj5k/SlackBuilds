@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -e
+
+VERSION=${VERSION:-0.21.git}
+BUILD=${BUILD:-1}
+TAG=${TAG:-dc}
+TMP=${TMP:-/tmp}
+PKG=$TMP/package-mpd
+GITDIR="MPD"
+
+if [ -d "$PKG" ]; then
+  rm -rf "$PKG"
+fi
+
+
+if [ -d "$GITDIR" ]; then
+  rm -rf "$GITDIR"
+fi
+
+# v0.21.x
+git clone -b master https://github.com/MusicPlayerDaemon/MPD.git
+
+cd "$GITDIR"
+
+meson --prefix=/usr . output/release --buildtype=debugoptimized -Db_ndebug=true
+ninja -j4 -C output/release
+DESTDIR=$PKG ninja -C output/release install
+
+mkdir "$PKG/usr/doc"
+mv "$PKG/usr/share/doc/mpd" "$PKG/usr/doc"
+rmdir "$PKG/usr/share/doc"
+
+mkdir "$PKG/install"
+wget -O "$PKG/install/slack-desc" https://raw.githubusercontent.com/Ponce/slackbuilds/current/audio/mpd/slack-desc
+
+cd "$PKG"
+/sbin/makepkg -l y -c n "$TMP/mpd-$VERSION-$BUILD$TAG.${PKGTYPE:-tgz}"
