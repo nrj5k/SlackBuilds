@@ -4,7 +4,7 @@ set -e
 
 VERSION=${VERSION:-0.21.git}
 BUILD=${BUILD:-1}
-TAG=${TAG:-dc}
+TAG=${TAG:-nrj5k}
 TMP=${TMP:-/tmp}
 PKG=$TMP/package-mpd
 GITDIR="MPD"
@@ -32,7 +32,7 @@ mv "$PKG/usr/share/doc/mpd" "$PKG/usr/doc"
 rmdir "$PKG/usr/share/doc"
 
 mkdir "$PKG/install"
-wget -O "$PKG/install/slack-desc" https://raw.githubusercontent.com/Ponce/slackbuilds/current/audio/mpd/slack-desc
+wget -O "$PKG/install/slack-desc" https://raw.githubusercontent.com/nrj5k/SlackBuilds/master/mpd/slack-desc
 
 cd "$PKG"
 /sbin/makepkg -l y -c n "$TMP/mpd-$VERSION-$BUILD$TAG.${PKGTYPE:-tgz}"

@@ -2,7 +2,7 @@
 
 # Slackware build script for N1 Mail Client 
 
-# Copyright 2015 - 2016  Neeraj Rajesh, Mount Pleasant, MI, USA
+# Copyright 2015 - 2016
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,7 +25,7 @@
 PRGNAM=N1
 VERSION=	# Ephemeral version
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-nrj5k}
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}

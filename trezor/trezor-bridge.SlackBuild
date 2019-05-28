@@ -24,6 +24,11 @@
 
 PKGNAM=trezor-bridge
 RELEASE=${RELEASE:-2.0.25}    # stable, beta, or unstable
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+TAG=${TAG:-nrj5k}
+PKG=$TMP/package-$PKGNAM
+OUTPUT=${OUTPUT:-/tmp}
 
 # Allow $ARCH to be preset before running the script.  This is useful in the
 # case where someone is running a 32-bit chroot environment under an x86_64
@@ -45,27 +50,6 @@ EOF
   exit 1
 fi
 
-# if ! /bin/ls ${PKGNAM}-*.deb 1> /dev/null 2> /dev/null ; then
-#   cat << EOF
-#
-# This is a script to repackage a Debian/Ubuntu Google Chrome .deb package
-# for Slackware.  Run this script in the same directory as one of these
-# binary packages:
-#
-#   google-chrome-stable_current_amd64.deb  (for 64-bit x86_64)
-#   google-chrome-stable_current_i386.deb   (for 32-bit x86)
-#
-# This will create a Slackware .txz package.  Install it with installpkg
-# or use upgradepkg to upgrade from a previous version.
-#
-# EOF
-#   exit 1
-# fi
-
-CWD=$(pwd)
-TMP=${TMP:-/tmp}
-PKG=$TMP/package-$PKGNAM
-OUTPUT=${OUTPUT:-/tmp}
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -86,4 +70,4 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 # echo "/usr/bin/trezord" >> /etc/rc.d/rc.trezor
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$RELEASE-$ARCH.txz
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$RELEASE-$ARCH$TAG.txz

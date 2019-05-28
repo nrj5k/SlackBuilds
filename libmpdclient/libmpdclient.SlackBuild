@@ -5,7 +5,7 @@ set -e
 VERSION=${VERSION:-2.16}
 
 BUILD=${BUILD:-1}
-TAG=${TAG:-dc}
+TAG=${TAG:-nrj5k}
 TMP=${TMP:-/tmp}
 
 PKG=$TMP/package-libmpdclient

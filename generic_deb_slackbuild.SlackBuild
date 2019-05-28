@@ -83,7 +83,7 @@ mv lib etc
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 
-# echo "/usr/bin/trezord" >> /etc/rc.d/rc.trezor
+# echo "/usr/bin/trezord" >> /etc/rc.d/rc.trezor  # for the daemon
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$RELEASE-$ARCH.txz
