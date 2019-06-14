@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -e
+
+VERSION=${VERSION:-v1.5}
+BUILD=${BUILD:-1}
+TAG=${TAG:-nrj5k}
+TMP=${TMP:-/tmp}
+CWD=$(pwd)
+GITDIR="clazy"
+PKG="$TMP/package-$GITDIR"
+PRGNAM="clazy"
+
+
+if [ -d "$PKG" ]; then
+  rm -rf "$PKG"
+fi
+
+
+if [ -d "$GITDIR" ]; then
+  rm -rf "$GITDIR"
+fi
+
+git clone -b $VERSION https://github.com/KDE/clazy.git
+
+cd "$GITDIR"
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+INSTALL_PATH=$PKG/usr make
+make install DESTDIR=$PKG
+
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+# cp -a README $PKG/usr/doc/$PRGNAM-$VERSION
+
+
+# Create a directory for documentation
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+
+# Copy documentation to the docs directory and fix permissions
+cp -a docs/man/ $PKG/usr/doc/$PRGNAM-$VERSION
+find $PKG/usr/doc/$PRGNAM-$VERSION -type f -exec chmod 644 {} \;
+
+
+# cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+find $PKG/usr/doc -type f -exec chmod 0644 {} \;
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n "$TMP/$PRGNAM-$VERSION-$BUILD-$TAG.${PKGTYPE:-tgz}"
+
