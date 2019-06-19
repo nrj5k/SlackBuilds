@@ -1,2 +1,3 @@
-libmpdclient is a stable, documented, asynchronous API library for interfacing
-MPD in the C, C++, and Objective C languages.
+clazy is a compiler plugin which allows clang to understand Qt semantics. You 
+get more than 50 Qt related compiler warnings, ranging from unneeded memory 
+allocations to misusage of API, including fix-its for automatic refactoring.
