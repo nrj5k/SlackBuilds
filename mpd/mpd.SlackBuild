@@ -35,4 +35,4 @@ mkdir "$PKG/install"
 wget -O "$PKG/install/slack-desc" https://raw.githubusercontent.com/nrj5k/SlackBuilds/master/mpd/slack-desc
 
 cd "$PKG"
-/sbin/makepkg -l y -c n "$TMP/mpd-$VERSION-$BUILD$TAG.${PKGTYPE:-tgz}"
+/sbin/makepkg -l y -c n "$TMP/mpd-$VERSION-$BUILD-$TAG.${PKGTYPE:-tgz}"
