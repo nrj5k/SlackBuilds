@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION=${VERSION:-v1.5}
+VERSION=${VERSION:-v1.6}
 BUILD=${BUILD:-1}
 TAG=${TAG:-nrj5k}
 TMP=${TMP:-/tmp}

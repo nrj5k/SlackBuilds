@@ -23,7 +23,7 @@
 
 
 PKGNAM=trezor-bridge
-RELEASE=${RELEASE:-2.0.25}    # stable, beta, or unstable
+RELEASE=${RELEASE:-2.0.27}    # stable, beta, or unstable
 CWD=$(pwd)
 TMP=${TMP:-/tmp}
 TAG=${TAG:-nrj5k}
@@ -70,4 +70,4 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 # echo "/usr/bin/trezord" >> /etc/rc.d/rc.trezor
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$RELEASE-$ARCH$TAG.txz
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$RELEASE-$ARC-$TAG.txz

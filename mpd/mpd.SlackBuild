@@ -19,7 +19,7 @@ if [ -d "$GITDIR" ]; then
 fi
 
 # v0.21.x
-git clone -b master https://github.com/MusicPlayerDaemon/MPD.git
+git clone -b v0.21.18 https://github.com/MusicPlayerDaemon/MPD.git
 
 cd "$GITDIR"
 

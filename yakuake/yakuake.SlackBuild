@@ -30,7 +30,7 @@
 # Modified by SlackBuilds.org
 
 PRGNAM=yakuake
-VERSION=${VERSION:-3.0.5}
+VERSION=${VERSION:-19.12.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-nrj5k}
 
@@ -66,8 +66,8 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-unzip $CWD/$PRGNAM-$VERSION.zip
+rm -rf $PRGNAM-v$VERSION
+tar xvf $CWD/v$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \

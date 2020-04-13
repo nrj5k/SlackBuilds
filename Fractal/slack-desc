@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+   |-----handy-ruler------------------------------------------------------|
+Fractal: Fractal (Matrix messaging app for GNOME written in Rust)
+Fractal: Fractal is a Matrix messaging app for GNOME written in Rust. 
+Fractal: Its interface is optimized for collaboration in large groups, 
+Fractal: such as free software projects.
+Fractal: 
+Fractal: Main repository: https://gitlab.gnome.org/GNOME/fractal/
+Fractal: 
+Fractal:
+Fractal:
+Fractal:
+Fractal:

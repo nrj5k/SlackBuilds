@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -e
+
+VERSION=${VERSION:-4.2.1.git}
+BUILD=${BUILD:-1}
+TAG=${TAG:-nrj5k}
+TMP=${TMP:-/tmp}
+PKG=$TMP/package-fractal
+GITDIR="fractal"
+
+if [ -d "$PKG" ]; then
+  rm -rf "$PKG"
+fi
+
+
+if [ -d "$GITDIR" ]; then
+  rm -rf "$GITDIR"
+fi
+
+# v0.21.x
+git clone -b 4.2.1 https://gitlab.gnome.org/GNOME/fractal.git
+
+cd "$GITDIR"
+
+meson --prefix=/usr . output/release --buildtype=debugoptimized -Db_ndebug=true
+ninja -j4 -C output/release
+DESTDIR=$PKG ninja -C output/release install
+
+mkdir "$PKG/usr/doc"
+mv "$PKG/usr/share/doc/$GITDIR" "$PKG/usr/doc"
+rmdir "$PKG/usr/share/doc"
+
+mkdir "$PKG/install"
+# wget -O "$PKG/install/slack-desc" https://raw.githubusercontent.com/nrj5k/SlackBuilds/master/mpd/slack-desc
+
+cd "$PKG"
+/sbin/makepkg -l y -c n "$TMP/$GITDIR-$VERSION-$BUILD-$TAG.${PKGTYPE:-tgz}"
