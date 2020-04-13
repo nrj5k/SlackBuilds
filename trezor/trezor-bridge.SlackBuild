@@ -70,4 +70,4 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 # echo "/usr/bin/trezord" >> /etc/rc.d/rc.trezor
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$RELEASE-$ARC-$TAG.txz
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$RELEASE$ARC-$TAG.txz
