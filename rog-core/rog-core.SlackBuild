@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -e
+
+VERSION=${VERSION:-git}
+BUILD=${BUILD:-1}
+TAG=${TAG:-nrj5k}
+TMP=${TMP:-/tmp}
+PKG=$TMP/package-rog-core
+GITDIR="rog-core"
+
+if [ -d "$PKG" ]; then
+  rm -rf "$PKG"
+fi
+
+
+if [ -d "$GITDIR" ]; then
+  rm -rf "$GITDIR"
+fi
+
+CWD=$(pwd)
+# v0.21.x
+git clone https://github.com/flukejones/rog-core.git
+cd "$GITDIR"
+
+make DESTDIR=$PKG 
+make install DESTDIR=$PKG 
+
+
+## now put the startup script in rc.d/
+# Install rc script
+mkdir -p $PKG/etc/rc.d
+cat $CWD/rc.rog-core > $PKG/etc/rc.d/rc.rog-core.new
+chmod 0644 $PKG/etc/rc.d/rc.rog-core.new
+
+mkdir "$PKG/usr/doc"
+mv "$PKG/usr/share/doc/mpd" "$PKG/usr/doc"
+rmdir "$PKG/usr/share/doc"
+
+mkdir "$PKG/install"
+cp slack-desc "$PKG/install/slack-desc"
+
+cd "$PKG"
+/sbin/makepkg -l y -c n "$TMP/mpd-$VERSION-$BUILD-$TAG.${PKGTYPE:-tgz}"
