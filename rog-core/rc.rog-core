@@ -35,7 +35,7 @@ case "$1" in
         	;;
 	start)
         	echo "Start ROG-Core..."
-                "$DAEMON -d" 1>/dev/null 2>&1 &
+                $DAEMON -d  1>/dev/null 2>&1 &
         	;;
 	restart)
         	$0 stop

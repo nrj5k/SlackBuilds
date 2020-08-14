@@ -26,6 +26,11 @@ cd "$GITDIR"
 make DESTDIR=$PKG 
 make install DESTDIR=$PKG 
 
+# mkdir -p $PKG/etc/udev/rules.d
+# mv -v $PKG/lib/udev/rules.d/99-rog-core.rules $PKG/etc/udev/rules.d
+# rm -rfv $PKG/lib/udev
+
+rm -v $PKG/lib/systemd/system/rog-core.service
 
 ## now put the startup script in rc.d/
 # Install rc script
@@ -33,12 +38,8 @@ mkdir -p $PKG/etc/rc.d
 cat $CWD/rc.rog-core > $PKG/etc/rc.d/rc.rog-core.new
 chmod 0644 $PKG/etc/rc.d/rc.rog-core.new
 
-mkdir "$PKG/usr/doc"
-mv "$PKG/usr/share/doc/mpd" "$PKG/usr/doc"
-rmdir "$PKG/usr/share/doc"
-
 mkdir "$PKG/install"
-cp slack-desc "$PKG/install/slack-desc"
+cp $CWD/slack-desc "$PKG/install/slack-desc"
 
 cd "$PKG"
-/sbin/makepkg -l y -c n "$TMP/mpd-$VERSION-$BUILD-$TAG.${PKGTYPE:-tgz}"
+/sbin/makepkg -l y -c n "$TMP/$GITDIR-$VERSION-$BUILD-$TAG.${PKGTYPE:-tgz}"
