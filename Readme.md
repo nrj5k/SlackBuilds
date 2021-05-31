@@ -1,5 +1,7 @@
 # Just some SlackBuilds
 
+# Moved to [GITLAB](https://gitlab.com/nrj5k/SlackBuilds)
+
 I tweaked most of them, none written from scratch. If you find them useful, yay!
 
 The Trezor-Bridge Slackbuild is trash, need to add:
